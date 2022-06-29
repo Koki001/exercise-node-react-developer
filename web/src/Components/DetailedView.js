@@ -19,7 +19,7 @@ const DetailedView = (props) => {
     <div className="commitMessage">
       <h4>Most recent commit: {props.updated_at}</h4>
       <p>Author: {props.name}</p>
-      <p>Message: {data && message}</p>
+      <p>Message: {data ? message : "Sorry we could not access the latest commit"}</p>
     </div>
   );
 };
