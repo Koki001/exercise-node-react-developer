@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import './App.css';
+import DetailedView from './Components/DetailedView';
 import useFetch from './useFetch';
 
 export function App() {
   const [apiData, setApiData] = useState([] as any[]);
   const [listFilter, setListFilter] = useState('');
+  const [listOpen, setListOpen] = useState('' as any);
 
   const { data } = useFetch('http://localhost:4000/repos');
   useEffect(() => {
@@ -56,14 +58,18 @@ export function App() {
                 if (listFilter !== '') {
                   return list.language === listFilter;
                 } else {
-                  return list
+                  return list;
                 }
               })
-              .map((list) => {
-                // console.log(list);
+              .map((list, i) => {
                 return (
-                  <li key={list.id}>
-                    <h4 className="listTitle">{list.full_name}</h4>
+                  <li
+                    onClick={() =>
+                      listOpen === i ? setListOpen('') : setListOpen(i)
+                    }
+                    key={list.id}
+                  >
+                    <h4 className="listTitle">{list.name}</h4>
                     <p className="listDescription">
                       {list.description !== null
                         ? list.description
@@ -73,6 +79,7 @@ export function App() {
                       Language used: {list.language}
                     </p>
                     <p className="listForks">Forks count: {list.forks_count}</p>
+                    {i === listOpen ? <DetailedView {...list} /> : null}
                   </li>
                 );
               })}
