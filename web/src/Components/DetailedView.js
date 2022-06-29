@@ -15,7 +15,6 @@ const DetailedView = (props) => {
     }
   }, [data]);
 
-  console.log(data);
   return (
     <div className="commitMessage">
       <h4>Most recent commit: {props.updated_at}</h4>

@@ -17,6 +17,7 @@ export function App() {
   }, [data]);
 
   const handleFilter = (e: any) => {
+    setListOpen('');
     if (e.target.textContent === 'PHP') {
       setListFilter('PHP');
     } else if (e.target.textContent === 'English') {

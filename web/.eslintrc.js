@@ -32,6 +32,7 @@ const newConfig = Object.assign({}, config, {
   extends: [...config.extends, 'react-app/jest', 'plugin:prettier/recommended'],
   rules: Object.assign(updateWarnRulesToErrorRules(config.rules), {
     'react/jsx-boolean-value': ['error', 'always'],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     'react/jsx-key': 'error',
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react/self-closing-comp': 'error',
@@ -71,6 +72,7 @@ const newConfig = Object.assign({}, config, {
           '@typescript-eslint/adjacent-overload-signatures': 'error',
           '@typescript-eslint/array-type': [
             'error',
+            "prettier/prettier": ["error", { "endOfLine": "auto" }],
             { default: 'array-simple' },
           ],
           '@typescript-eslint/ban-types': 'error',
