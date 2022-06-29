@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
+import useFetch from './useFetch';
 
 export function App() {
+  const [apiData, setApiData] = useState([] as any[]);
+
+  const { data } = useFetch('http://localhost:4000/repos');
+  console.log(apiData);
+  useEffect(() => {
+    if (data) {
+      setApiData(data);
+    }
+  }, [data]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Data</h1>
+      <div className="dataContainer">
+        <ul className="dataList">
+          {apiData &&
+            apiData.map((list) => {
+              console.log(list);
+              return (
+                <li key={list.id}>
+                  <h4 className="listTitle">{list.name}</h4>
+                  <p className="listDescription">
+                    {list.description !== null
+                      ? list.description
+                      : 'No description available'}
+                  </p>
+                  <p className="listLanguage">{list.language}</p>
+                  <p className="listForks">{list.forks_count}</p>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
     </div>
   );
 }
